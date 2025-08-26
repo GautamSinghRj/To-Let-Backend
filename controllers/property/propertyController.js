@@ -74,16 +74,16 @@ const addProperty = async (req, res) => {
       return res.status(404).json({ message: "User not found." });
     }
 
-    // Bypass coupon validation if user is admin or intermidiate
-    // if (user.role !== "admin" || user.role !== "intermidiate") {
-    //   if ((couponStatus === "true" || couponStatus === true) && coupon) {
-    //     user.coupons.set(coupon, true);
-    //   } else {
-    //     return res
-    //       .status(400)
-    //       .json({ message: "Coupon not found. Enter the correct coupon" });
-    //   }
-    // }
+
+     if (user.role !== "admin" || user.role !== "intermediate") {
+       if ((couponStatus === "true" || couponStatus === true) && coupon) {
+         user.coupons.set(coupon, true);
+       } else {
+         return res
+           .status(400)
+           .json({ message: "Coupon not found. Enter the correct coupon" });
+       }
+     }
 
     if (!resolvedPincode) {
       return res
